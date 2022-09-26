@@ -1,0 +1,39 @@
+---
+- hosts: staging
+  become: yes
+  #  remote_user: ec2-user
+  #  become_user: root
+  tasks:
+  - name: yum update
+    yum:
+      name: '*'
+      state: latest
+
+      #  - name: Install java
+      #    yum:
+      #      name: java-openjdk11
+      #      state: present
+  - name: Install java
+    yum:
+      name: java
+      state: latest
+  - name: Install git
+    yum:
+      name: git
+      state: latest
+  - name: install Docker
+    yum:
+      name: docker
+      state: present
+      update_cache: true
+
+  - name: start Docker
+    service:
+      name: docker
+      state: started
+      enabled: true
+  - name: Install docker-compose
+    get_url:
+      url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+      dest: /usr/local/bin/docker-compose
+      mode: 'u+x,g+x'
