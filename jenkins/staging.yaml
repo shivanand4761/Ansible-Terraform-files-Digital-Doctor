@@ -1,18 +1,11 @@
 ---
 - hosts: staging
   become: yes
-  #  remote_user: ec2-user
-  #  become_user: root
   tasks:
   - name: yum update
     yum:
       name: '*'
       state: latest
-
-      #  - name: Install java
-      #    yum:
-      #      name: java-openjdk11
-      #      state: present
   - name: Install java
     yum:
       name: java
