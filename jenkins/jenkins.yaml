@@ -1,8 +1,6 @@
 ---
 - hosts: jenkins
   become: yes
-  #  remote_user: ec2-user
-  #  become_user: root
   tasks:
   - name: Download Long Term Jenkins release
     get_url:
@@ -18,11 +16,7 @@
     yum:
       name: '*'
       state: latest
-
-      #  - name: Install java
-      #    yum:
-      #      name: java-openjdk11
-      #      state: present
+      
   - name:
     yum:
       name: java
